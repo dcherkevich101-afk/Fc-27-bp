@@ -1,158 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>FC 27 — Сезонный БП</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b10">
+<title>FC 27 — Трекер</title>
 <style>
-:root{--bg:#0b0d12;--card:#151922;--card2:#1c212d;--text:#f5f7fb;--muted:#9ca6b8;--accent:#39e58c;--line:#2b3240;--gold:#ffd45c}
-*{box-sizing:border-box}
-body{margin:0;background:linear-gradient(180deg,#090b10,#10141d);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-.wrap{max-width:760px;margin:auto;padding:18px 14px 40px}
-h1{font-size:26px;margin:4px 0 3px}.sub{color:var(--muted);font-size:14px;margin-bottom:16px}
-.hero{background:linear-gradient(145deg,#17221e,#151922);border:1px solid #2d453a;border-radius:20px;padding:18px;margin-bottom:12px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.level{font-size:44px;font-weight:800;line-height:1}.level small{display:block;font-size:13px;color:var(--muted);font-weight:500;margin-top:6px}
-.sp{font-size:17px;font-weight:700}.sp span{color:var(--accent)}
-.bar{height:10px;background:#252b36;border-radius:99px;overflow:hidden;margin:16px 0 7px}.fill{height:100%;background:linear-gradient(90deg,var(--accent),#75f0b0);width:0%;transition:.2s}
-.next{font-size:13px;color:var(--muted)}
-.controls{display:flex;gap:10px;margin:14px 0}.btn{border:0;border-radius:14px;padding:14px 18px;font-size:17px;font-weight:800;cursor:pointer;background:var(--card2);color:white;flex:1}.btn.plus{background:var(--accent);color:#07110c}.btn:active{transform:scale(.98)}
-.reset{background:transparent;border:1px solid var(--line);color:var(--muted);font-size:13px;padding:9px 12px;border-radius:10px}
-.tabs{display:flex;background:#12161e;border:1px solid var(--line);border-radius:13px;padding:4px;margin:12px 0}.tab{flex:1;border:0;background:transparent;color:var(--muted);padding:11px;border-radius:9px;font-weight:700}.tab.active{background:#252c38;color:white}
-.tracknote{font-size:12px;color:var(--muted);margin:8px 2px 12px}
-.reward{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;margin:8px 0}
-.reward.current{border-color:var(--accent);box-shadow:0 0 0 1px rgba(57,229,140,.15)}
-.num{min-width:34px;height:34px;border-radius:10px;background:#252b36;display:grid;place-items:center;font-weight:800}.current .num{background:var(--accent);color:#07110c}
-.rbody{flex:1}.rtitle{font-weight:750;font-size:14px;line-height:1.35}.rsub{font-size:12px;color:var(--muted);margin-top:3px}
-.badge{font-size:11px;color:var(--gold);white-space:nowrap}.done{opacity:.58}
-.footer{color:var(--muted);font-size:12px;text-align:center;margin-top:18px}
+*{box-sizing:border-box}body{margin:0;background:#080b10;color:#f4f7fb;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.wrap{max-width:720px;margin:auto;padding:42px 18px 50px}.eyebrow{color:#35e68a;font-weight:800;letter-spacing:1.5px;font-size:13px;text-transform:uppercase;margin-bottom:12px}
+h1{font-size:42px;line-height:1.02;margin:0 0 10px;font-weight:850}.sub{color:#9ca8ba;font-size:18px;line-height:1.45;margin-bottom:30px}
+.grid{display:grid;gap:14px}.card{display:block;text-decoration:none;color:#fff;background:#141a23;border:1px solid #2a3444;border-radius:24px;padding:24px;transition:.15s}.card:active{transform:scale(.98)}.card:hover{border-color:#3b495d}
+.icon{font-size:35px;margin-bottom:14px}.title{font-size:24px;font-weight:800;margin-bottom:7px}.desc{color:#9ca8ba;line-height:1.4;font-size:15px}
+.card.green{background:linear-gradient(145deg,#123323,#141a23);border-color:#315943}.arrow{float:right;color:#35e68a;font-size:28px}
+.info{margin-top:22px;color:#6f7c90;font-size:13px;line-height:1.5}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>FC 27 — Сезонный БП</h1>
-  <div class="sub">Сезон 1: «Обратите внимание» • 30 уровней • 1 000 ОС за уровень</div>
-
-  <section class="hero">
-    <div class="row">
-      <div class="level" id="level">0<small>ТЕКУЩИЙ УРОВЕНЬ</small></div>
-      <div class="sp">ОС: <span id="sp">0</span> / 30 000</div>
-    </div>
-    <div class="bar"><div class="fill" id="fill"></div></div>
-    <div class="next" id="next">До 1 уровня: 1 000 ОС</div>
-  </section>
-
-  <div class="controls">
-    <button class="btn" id="minus">−1 уровень</button>
-    <button class="btn plus" id="plus">+1 уровень</button>
-  </div>
-  <div class="row"><button class="reset" id="reset">Сбросить прогресс</button><div class="sub" style="margin:0">Прогресс сохраняется</div></div>
-
-  <div class="tabs">
-    <button class="tab active" data-track="standard">Обычный БП</button>
-    <button class="tab" data-track="premium">Premium</button>
-  </div>
-  <div class="tracknote" id="tracknote">Награды обычного БП</div>
-  <div id="rewards"></div>
-  <div class="footer">Нажимай +1 / −1 — список наград и текущий уровень обновляются автоматически.</div>
+<div class="eyebrow">EA SPORTS FC 27</div>
+<h1>Мой FC 27</h1>
+<div class="sub">Сезонный прогресс и задания — всё в одном месте.</div>
+<div class="grid">
+<a class="card green" href="bp.html"><span class="arrow">›</span><div class="icon">🎟️</div><div class="title">Сезонный БП</div><div class="desc">30 уровней • обычный и Premium БП • прогресс ОС • +1 / −1 уровень</div></a>
+<a class="card" href="objectives.html"><span class="arrow">›</span><div class="icon">📋</div><div class="title">Задания</div><div class="desc">FUT • Карьера • Manager Live • Игрок • The Grounds • отметки и счётчик прогресса</div></a>
 </div>
-
-<script>
-const rewards = {
-standard:[
-"Ultimate Team Bundle",
-"Набор FUT, The Grounds и Карьеры",
-"Набор FUT, The Grounds и Карьеры",
-"Набор FUT, The Grounds и Карьеры",
-"«Обратите внимание» Лука Вушкович",
-"Набор FUT, The Grounds и Карьеры",
-"Набор FUT и The Grounds",
-"Набор выбора игрока Ultimate Team",
-"Набор FUT и The Grounds",
-"«Обратите внимание» Элиза Зенс и Христос Цолис",
-"Набор Ultimate Team",
-"Выбор 1 из 4: 80+",
-"Набор FUT и The Grounds",
-"82+ ×2",
-"«Обратите внимание» Ли Кан-ин ИЛИ 82+ ×7",
-"Выбор 1 из 4: 81+",
-"Выбор 1 из 5: 81+",
-"Выбор 2 из 6: 82+ ИЛИ 15 000 монет",
-"82+ ×3",
-"«Обратите внимание» Родриго Салазар ИЛИ 83+ ×5",
-"82+ ×4",
-"75+ ×4 ИЛИ 83+ ×1",
-"83+ ×4",
-"84+ ×2",
-"84+ ×3",
-"«Обратите внимание» Юри Тилеманс ИЛИ 83+ ×7",
-"Cosmetic EVO Bundle",
-"83+ ×5",
-"84+ ×4",
-"«Обратите внимание» Ферран Торрес ИЛИ 84+ ×5"
-],
-premium:[
-"Premium FUT & The Grounds Bundle",
-"Premium FUT, The Grounds & Career Bundle",
-"«Обратите внимание» Эллиот Андерсон ИЛИ 83+ ×2",
-"Premium FUT, The Grounds & Career Bundle",
-"75+ ×2",
-"EFIGS: выбор 1 из 4 — 81+",
-"«Обратите внимание» Николь Аньоми и Максенс Лакруа",
-"FUT, The Grounds & Career Bundle",
-"«Обратите внимание» Мика Мармоль ИЛИ 81+ ×4",
-"Premium FUT & The Grounds Bundle",
-"2 500 ОС",
-"«Обратите внимание» Джед Спенс и Селина Черчи",
-"Выбор 1 из 5: 80+ + 30 000 монет",
-"EFIGS: выбор 1 из 5 — 82+ + EVO",
-"Premium FUT & The Grounds Bundle",
-"Выбор 1 из 3: 81+",
-"Выбор 1 из 4: 81+",
-"Выбор 1 из 3: 82+",
-"Выбор 1 из 4: 82+",
-"Выбор 1 из 3: 83+",
-"EFIGS: выбор 1 из 6 — 83+",
-"«Обратите внимание» Карим Адейеми ИЛИ 83+ ×5",
-"82+ ×4",
-"83+ ×2",
-"2 500 ОС",
-"EVO Bundle",
-"75+ ×10 ИЛИ 84+ ×2",
-"EVO ИЛИ 84+ ×3",
-"85+ двойной набор",
-"«Обратите внимание» Ян Диомандэ ИЛИ 84+ ×4"
-]};
-
-let level = Number(localStorage.getItem("fc27_level") || 0);
-if (!Number.isInteger(level) || level<0 || level>30) level=0;
-let track = localStorage.getItem("fc27_track") || "standard";
-
-function render(){
-  document.getElementById("level").innerHTML = level + '<small>ТЕКУЩИЙ УРОВЕНЬ</small>';
-  const sp=level*1000;
-  document.getElementById("sp").textContent=sp.toLocaleString("ru-RU");
-  document.getElementById("fill").style.width=(level/30*100)+"%";
-  document.getElementById("next").textContent =
-    level>=30 ? "Сезонный БП завершён — 30/30" :
-    "До " + (level+1) + " уровня: " + ((level+1)*1000-sp).toLocaleString("ru-RU") + " ОС";
-  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.track===track));
-  document.getElementById("tracknote").textContent=track==="standard"?"Награды обычного БП":"Награды Premium";
-  const box=document.getElementById("rewards"); box.innerHTML="";
-  rewards[track].forEach((r,i)=>{
-    const n=i+1, el=document.createElement("div");
-    el.className="reward"+(n===level?" current":"")+(n<level?" done":"");
-    el.innerHTML='<div class="num">'+n+'</div><div class="rbody"><div class="rtitle">'+r+'</div><div class="rsub">'+(n<=level?"Уровень получен":"Нужно "+(n*1000).toLocaleString("ru-RU")+" ОС")+'</div></div>'+(n===level?'<div class="badge">ТЕКУЩИЙ</div>':"");
-    box.appendChild(el);
-  });
-  localStorage.setItem("fc27_level",String(level));
-  localStorage.setItem("fc27_track",track);
-}
-document.getElementById("plus").onclick=()=>{if(level<30){level++;render()}};
-document.getElementById("minus").onclick=()=>{if(level>0){level--;render()}};
-document.getElementById("reset").onclick=()=>{level=0;render()};
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{track=b.dataset.track;render()});
-render();
-</script>
+<div class="info">Прогресс каждой страницы сохраняется отдельно на этом устройстве.</div>
+</div>
 </body>
 </html>
