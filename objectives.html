@@ -5,43 +5,68 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>FC 27 — Задания</title>
 <style>
-:root{--bg:#070b12;--panel:#101722;--panel2:#151e2b;--line:#263244;--txt:#f5f7fb;--muted:#8d9aab;--accent:#4ade80;--blue:#60a5fa;--gold:#fbbf24;--danger:#fb7185}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#122033 0,#070b12 42%);color:var(--txt);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-header{padding:20px 16px 10px;position:sticky;top:0;z-index:5;background:rgba(7,11,18,.94);backdrop-filter:blur(14px);border-bottom:1px solid #1c2735}
-h1{margin:0;font-size:25px} .sub{color:var(--muted);font-size:12px;margin-top:4px}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding:13px 0 5px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.tabs::-webkit-scrollbar{display:none}
-.tab{flex:0 0 auto;white-space:nowrap;border:1px solid #334155;background:#111a27;color:#d8e0ea;padding:10px 14px;border-radius:12px;cursor:pointer;font-size:13px;font-weight:600}
-.tab.active{background:#174629;border-color:#39a866;color:#d4ffe0;box-shadow:0 0 0 1px rgba(74,222,128,.12) inset}
-@media(max-width:600px){header{padding-bottom:8px}.tabs{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}.tab{font-size:12px;padding:9px 12px}}
-main{max-width:900px;margin:auto;padding:14px 12px 40px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}.toolbar button{border:1px solid var(--line);background:var(--panel);color:var(--txt);padding:9px 11px;border-radius:10px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.stat{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:11px}.stat b{display:block;font-size:19px}.stat span{color:var(--muted);font-size:11px}
-.group{background:rgba(16,23,34,.92);border:1px solid var(--line);border-radius:16px;margin:10px 0;overflow:hidden}.gh{padding:14px 14px 11px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.gh h2{font-size:16px;margin:0}.gh p{font-size:12px;color:var(--muted);margin:3px 0 0}.badge{white-space:nowrap;color:#b7f7c9;background:#12301f;border:1px solid #265f3c;border-radius:999px;padding:4px 8px;font-size:11px;height:max-content}
-.task{display:grid;grid-template-columns:26px 1fr auto;gap:9px;align-items:start;padding:12px 14px;border-bottom:1px solid #1c2735}.task:last-child{border-bottom:0}.task input{width:19px;height:19px;accent-color:var(--accent);margin-top:2px}.task.done .name{text-decoration:line-through;color:#7f8b9a}.name{font-weight:600}.desc{color:#aab5c3;font-size:12px;margin-top:3px}.reward{font-size:11px;color:var(--gold);text-align:right;max-width:150px}.source{font-size:10px;color:#64748b;margin-top:3px}
-.note{padding:11px 13px;background:#111827;border:1px dashed #344155;border-radius:12px;color:#aeb9c7;font-size:12px;margin:12px 0}
-.search{width:100%;padding:11px 12px;border-radius:11px;border:1px solid var(--line);background:var(--panel);color:var(--txt);outline:none;margin-bottom:10px}
-footer{text-align:center;color:#64748b;font-size:11px;padding:20px}
-@media(min-width:700px){.task{grid-template-columns:28px 1fr 190px}.stats{max-width:520px}}
+:root{--bg:#070b12;--panel:#101722;--panel2:#151e2b;--line:#263244;--txt:#f5f7fb;--muted:#8d9aab;--accent:#4ade80;--gold:#fbbf24}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 20% 0,#122033 0,#070b12 44%);color:var(--txt);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+header{padding:22px 16px 14px;background:rgba(7,11,18,.96);border-bottom:1px solid #1c2735}
+.wrap{max-width:900px;margin:auto}
+h1{margin:0;font-size:27px}.sub{color:var(--muted);font-size:13px;margin-top:5px}
+main{max-width:900px;margin:auto;padding:16px 14px 45px}
+.view{display:none}.view.active{display:block}
+.home-title{font-size:18px;font-weight:700;margin:4px 0 12px}
+.home-sub{color:var(--muted);font-size:12px;margin-bottom:14px}
+.category-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.category{border:1px solid var(--line);background:linear-gradient(145deg,#151f2d,#0f1722);border-radius:17px;padding:17px 15px;min-height:112px;text-align:left;color:var(--txt);cursor:pointer;position:relative;overflow:hidden}
+.category:active{transform:scale(.985)} .category:hover{border-color:#3d526d}
+.category .num{font-size:11px;color:var(--muted);margin-bottom:9px}
+.category .title{font-size:17px;font-weight:750}
+.category .count{font-size:11px;color:#8fa0b5;margin-top:7px}
+.category .arrow{position:absolute;right:14px;bottom:13px;font-size:22px;color:#6f8196}
+.category.active-card{background:linear-gradient(145deg,#153523,#102318);border-color:#318353}
+.search{width:100%;padding:12px 13px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--txt);outline:none;margin:0 0 10px}
+.topbar{display:flex;align-items:center;gap:9px;margin-bottom:13px}
+.back{border:1px solid var(--line);background:var(--panel);color:var(--txt);border-radius:11px;padding:10px 13px;font-weight:650}
+.section-title{font-size:21px;font-weight:800}.section-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:11px 0}.toolbar button{border:1px solid var(--line);background:var(--panel);color:var(--txt);padding:9px 11px;border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 13px}.stat{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:10px}.stat b{display:block;font-size:18px}.stat span{color:var(--muted);font-size:10px}
+.group{background:rgba(16,23,34,.94);border:1px solid var(--line);border-radius:16px;margin:10px 0;overflow:hidden}
+.gh{padding:13px 14px 10px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.gh h2{font-size:15px;margin:0}.gh p{font-size:11px;color:var(--muted);margin:3px 0 0}
+.badge{white-space:nowrap;color:#b7f7c9;background:#12301f;border:1px solid #265f3c;border-radius:999px;padding:4px 8px;font-size:10px;height:max-content}
+.task{display:grid;grid-template-columns:25px 1fr auto;gap:8px;align-items:start;padding:11px 13px;border-bottom:1px solid #1c2735}.task:last-child{border-bottom:0}
+.task input{width:19px;height:19px;accent-color:var(--accent);margin-top:2px}.task.done .name{text-decoration:line-through;color:#7f8b9a}.name{font-weight:650}.desc{color:#aab5c3;font-size:11px;margin-top:3px}.reward{font-size:10px;color:var(--gold);text-align:right;max-width:145px}
+.note{padding:11px 13px;background:#111827;border:1px dashed #344155;border-radius:12px;color:#aeb9c7;font-size:11px;margin:14px 0}
+.empty{padding:30px 12px;text-align:center;color:var(--muted)}
+footer{text-align:center;color:#64748b;font-size:10px;padding:18px}
+@media(max-width:600px){.category-grid{grid-template-columns:1fr 1fr}.category{min-height:106px;padding:14px}.category .title{font-size:15px}.task{grid-template-columns:25px 1fr}.reward{grid-column:2;text-align:left;max-width:none;margin-top:2px}.stats{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
-<header>
+<header><div class="wrap">
 <h1>FC 27 — Задания</h1>
-<div class="sub">Выбирай раздел ниже — искать каждое задание через поиск больше не нужно.</div>
-<div class="tabs" id="tabs"></div>
-</header>
+<div class="sub">Выбери раздел — задания откроются сразу внутри него.</div>
+</div></header>
 <main>
-<input class="search" id="search" placeholder="Поиск задания или группы…">
+<section id="home" class="view active">
+<div class="home-title">Разделы заданий</div>
+<div class="home-sub">Как в FC Hub: нажимаешь на нужный раздел и видишь только его задания.</div>
+<div class="category-grid" id="categories"></div>
+</section>
+
+<section id="section" class="view">
+<div class="topbar">
+<button class="back" onclick="goHome()">← Все разделы</button>
+<div><div class="section-title" id="sectionTitle"></div><div class="section-sub" id="sectionSub"></div></div>
+</div>
+<input class="search" id="search" placeholder="Поиск внутри раздела…">
 <div class="toolbar">
-<button onclick="markAll(false)">Сбросить текущую вкладку</button>
-<button onclick="markAll(true)">Отметить текущую вкладку</button>
-<button onclick="resetAll()">Сбросить всё</button>
+<button onclick="markCurrent(false)">Сбросить раздел</button>
+<button onclick="markCurrent(true)">Отметить раздел</button>
 </div>
 <div class="stats"><div class="stat"><b id="done">0</b><span>выполнено</span></div><div class="stat"><b id="left">0</b><span>осталось</span></div><div class="stat"><b id="pct">0%</b><span>прогресс</span></div></div>
-<div id="app"></div>
-<div class="note">⚠️ Временные цели (Weekly/Daily/Live Events) могут меняться по ходу сезона. Я не подставляю выдуманные задачи: если у FUT.GG сейчас отображается только название группы, карточка оставлена на уровне группы. <b>The Grounds</b> специально сохранён.</div>
-<footer>Последняя сверка веб-данных: 24.09.2026 • Прогресс хранится только в этом браузере (localStorage).</footer>
+<div id="groups"></div>
+</section>
+<div class="note">⚠️ Weekly/Daily/Live Events могут обновляться по ходу сезона. <b>The Grounds</b> сохранён как отдельный раздел внутри «Задания FC».</div>
+<footer>FC 27 Objective Tracker • прогресс хранится в Safari (localStorage)</footer>
 </main>
 <script>
 const DATA = {
@@ -112,13 +137,13 @@ const DATA = {
  ]}
 ],
 "Сезонные":[
- {g:"Weekly Rush Points",d:"Набирайте Rush Points через бонусы вместе с партнёрами.","2x 84+ Gold Players Pack",tasks:[
+ {g:"Weekly Rush Points",d:"Набирайте Rush Points через бонусы вместе с партнёрами. — Награда группы: 2x 84+ Gold Players Pack",tasks:[
   ["Weekly Rush Points","Complete Rush Bonuses alongside your teammates to earn Rush Points.","2x 84+ Gold Players Pack"]
  ]},
- {g:"Squad Battles: Champions Qualification Points",d:"Получайте очки квалификации Champions в Squad Battles.","100 Points",tasks:[
+ {g:"Squad Battles: Champions Qualification Points",d:"Получайте очки квалификации Champions в Squad Battles. — Награда группы: 100 Points",tasks:[
   ["Champions Qualification Points","Набрать Champions Qualification Points в Squad Battles.","100 Points"]
  ]},
- {g:"Claim the Armband",d:"Выберите 1 игрока Squad Foundations из 4 вариантов.","1 of 4 Squad Foundations Pick",tasks:[
+ {g:"Claim the Armband",d:"Выберите 1 игрока Squad Foundations из 4 вариантов. — Награда группы: 1 of 4 Squad Foundations Pick",tasks:[
   ["Claim the Armband","Завершить objective и выбрать Miley / Moi Gómez / Banzuzi / Danois.","1 of 4 Squad Foundations Pick"]
  ]},
  {g:"Season 1: Ones to Watch Exhibition",d:"Текущая OTW Exhibition.",tasks:[
@@ -127,19 +152,19 @@ const DATA = {
  {g:"Season 1: Ones to Watch Exhibition Completionist",d:"Завершение Weekly Play целей Exhibition.",tasks:[
   ["Completion 1","Завершить 1 weekly objective.","2,000 coins"],["Completion 2","Завершить 2.","4,000 coins"],["Completion 3","Завершить 3.","7,000 coins"],["Completion 4","Завершить 4.","13,000 coins"],["Группа","Завершить группу.","OTW Ousmane Diomandé"]
  ]},
- {g:"Season 1: Ones to Watch Exhibition Weekly Play",d:"Еженедельная серия OTW Exhibition. Состав может обновляться.","Consumable",tasks:[
+ {g:"Season 1: Ones to Watch Exhibition Weekly Play",d:"Еженедельная серия OTW Exhibition. Состав может обновляться. — Награда группы: Consumable",tasks:[
   ["Weekly Play","Выполнить актуальные Weekly Play challenges.","Consumable"]
  ]},
- {g:"Ones We Watched — Legendary",d:"Уровень сложности Legendary.","15x 75+ LaLiga Gold Players Pack",tasks:[["Legendary Challenge","Выполнить Legendary challenge.","15x 75+ LaLiga Gold Players Pack"]]},
- {g:"Ones We Watched — World Class",d:"Уровень сложности World Class.","5x 78+ Premier League Gold Players Pack",tasks:[["World Class Challenge","Выполнить World Class challenge.","5x 78+ Premier League Gold Players Pack"]]},
- {g:"Ones We Watched — Professional",d:"Уровень сложности Professional.","3x 78+ Serie A Gold Players Pack",tasks:[["Professional Challenge","Выполнить Professional challenge.","3x 78+ Serie A Gold Players Pack"]]},
- {g:"Ones We Watched — Semi-Pro",d:"Уровень сложности Semi-Pro.","82+ Premier League Gold Player Pack",tasks:[["Semi-Pro Challenge","Выполнить Semi-Pro challenge.","82+ Premier League Gold Player Pack"]]},
- {g:"Ones We Watched — Kick Off",d:"Kick Off challenges.","2x 75+ Gold Players Pack",tasks:[["Kick Off Challenge","Выполнить Kick Off challenge.","2x 75+ Gold Players Pack"]]},
- {g:"Ones We Watched Challenge Completionist",d:"Завершить Ones We Watched Objectives.","OTW Savinho",tasks:[["Completionist","Завершить требуемые Ones We Watched Objectives.","OTW Savinho"]]},
- {g:"FC 27 First Gameplay",d:"Viewership reward за трансляцию FC 27 First Gameplay.","Small Gold Players Pack",tasks:[["First Gameplay","Посмотреть соответствующую трансляцию Twitch/YouTube EASPORTSFC.","Small Gold Players Pack"]]}
+ {g:"Ones We Watched — Legendary",d:"Уровень сложности Legendary. — Награда группы: 15x 75+ LaLiga Gold Players Pack",tasks:[["Legendary Challenge","Выполнить Legendary challenge.","15x 75+ LaLiga Gold Players Pack"]]},
+ {g:"Ones We Watched — World Class",d:"Уровень сложности World Class. — Награда группы: 5x 78+ Premier League Gold Players Pack",tasks:[["World Class Challenge","Выполнить World Class challenge.","5x 78+ Premier League Gold Players Pack"]]},
+ {g:"Ones We Watched — Professional",d:"Уровень сложности Professional. — Награда группы: 3x 78+ Serie A Gold Players Pack",tasks:[["Professional Challenge","Выполнить Professional challenge.","3x 78+ Serie A Gold Players Pack"]]},
+ {g:"Ones We Watched — Semi-Pro",d:"Уровень сложности Semi-Pro. — Награда группы: 82+ Premier League Gold Player Pack",tasks:[["Semi-Pro Challenge","Выполнить Semi-Pro challenge.","82+ Premier League Gold Player Pack"]]},
+ {g:"Ones We Watched — Kick Off",d:"Kick Off challenges. — Награда группы: 2x 75+ Gold Players Pack",tasks:[["Kick Off Challenge","Выполнить Kick Off challenge.","2x 75+ Gold Players Pack"]]},
+ {g:"Ones We Watched Challenge Completionist",d:"Завершить Ones We Watched Objectives. — Награда группы: OTW Savinho",tasks:[["Completionist","Завершить требуемые Ones We Watched Objectives.","OTW Savinho"]]},
+ {g:"FC 27 First Gameplay",d:"Viewership reward за трансляцию FC 27 First Gameplay. — Награда группы: Small Gold Players Pack",tasks:[["First Gameplay","Посмотреть соответствующую трансляцию Twitch/YouTube EASPORTSFC.","Small Gold Players Pack"]]}
 ],
 "Кампании":[
- {g:"Tactical Trials",d:"Тактические испытания. Все награды untradeable.","Lucas Rosa Squad Foundations",tasks:[
+ {g:"Tactical Trials",d:"Тактические испытания. Все награды untradeable. — Награда группы: Lucas Rosa Squad Foundations",tasks:[
   ["4-3-3 (2)","Сыграть 5 матчей только в 4-3-3 (2), без изменений; минимум 1 стартовый игрок Eredivisie.","2x 75+"],
   ["5-2-1-2","Забить 4 гола только в 5-2-1-2, без изменений; минимум 1 стартовый игрок Bundesliga.","2x 78+"],
   ["4-1-2-1-2 (2)","Забить 6 голов только в 4-1-2-1-2 (2), без изменений; минимум 1 стартовый игрок LALIGA.","2x 80+"],
@@ -159,7 +184,7 @@ const DATA = {
  {g:"Rivals Milestone",d:"Матчи Division Rivals.",tasks:[["Play 5","Сыграть 5 Rivals матчей.","1 of 2 77+"],["Play 10","Сыграть 10 Rivals матчей.","1 of 2 78+"],["Play 15","Сыграть 15 Rivals матчей.","5,000 coins + 75+ Gold Player Pack"]]},
  {g:"Champions Milestone",d:"Матчи Champions.",tasks:[["Play 5","Сыграть 5 Champions матчей.","Coin Boost"],["Play 10","Сыграть 10 Champions матчей.","75-83 Gold Player Pack"],["Play 15","Сыграть 15 Champions матчей.","4x 81+ Gold Players Pack + 5,000 coins"]]},
  {g:"Gallery Milestone",d:"Развитие Gallery Score.",tasks:[["Gallery Milestone","Повышать Gallery Score и открывать milestone rewards.","Evo Unlock"]]},
- {g:"Ted Lasso’s Masterclass",d:"Тематические цели AFC Richmond / Ted Lasso. Состав временный.","Manager Evo Unlock",tasks:[["Ted Lasso’s Masterclass","Выполнить актуальные challenges группы.","Manager Evo Unlock"]]}
+ {g:"Ted Lasso’s Masterclass",d:"Тематические цели AFC Richmond / Ted Lasso. Состав временный. — Награда группы: Manager Evo Unlock",tasks:[["Ted Lasso’s Masterclass","Выполнить актуальные challenges группы.","Manager Evo Unlock"]]}
 ],
 "Мастерство":[
  {g:"Squad Battles Mastery",d:"Долгосрочные победы в Squad Battles.",tasks:[["Win 25","Выиграть 25 матчей минимум на Semi-Pro.","Small Gold Players Pack"],["Win 50","Выиграть 50 матчей.","Large Gold Pack"],["Win 100","Выиграть 100 матчей.","84+ Gold Player Pack"]]},
@@ -177,44 +202,52 @@ const DATA = {
 ]
 };
 
-const key="fc27_objectives_v6";
+const key="fc27_objectives_v8";
 let state=JSON.parse(localStorage.getItem(key)||"{}");
-let active="Сезон FC";
-const tabs=document.getElementById("tabs"),app=document.getElementById("app"),search=document.getElementById("search");
-function id(s){return s.replace(/[^a-zA-Zа-яА-Я0-9]+/g,"_")}
+let active=null;
+const $=id=>document.getElementById(id);
+const safeId=s=>s.replace(/[^a-zA-Zа-яА-Я0-9]+/g,"_");
 function save(){localStorage.setItem(key,JSON.stringify(state))}
-function isDone(k){return !!state[k]}
-function setDone(k,v){state[k]=v;save();render()}
-function totals(){
- let all=0,done=0;
- Object.values(DATA).forEach(gs=>gs.forEach(g=>g.tasks.forEach(t=>{all++;if(isDone(id(g.g)+"__"+id(t[0])))done++})));
- return [all,done]
-}
-function renderTabs(){
- tabs.innerHTML=Object.keys(DATA).map(x=>`<button class="tab ${x===active?"active":""}" onclick="active=${JSON.stringify(x)};search.value='';render()">${x}</button>`).join("");
-}
-function render(){
- renderTabs(); let q=search.value.trim().toLowerCase(), all=0,done=0;
- let groups=DATA[active]||[];
- app.innerHTML=groups.map(g=>{
-   let tasks=g.tasks.filter(t=>!q || (g.g+" "+g.d+" "+t[0]+" "+t[1]+" "+t[2]).toLowerCase().includes(q));
-   if(!tasks.length)return "";
-   let gd=tasks.filter(t=>isDone(id(g.g)+"__"+id(t[0]))).length;
-   all+=tasks.length;done+=gd;
-   return `<section class="group"><div class="gh"><div><h2>${g.g}</h2><p>${g.d||""}</p></div><span class="badge">${gd}/${tasks.length}</span></div>`+
-   tasks.map(t=>{let k=id(g.g)+"__"+id(t[0]),ok=isDone(k);return `<label class="task ${ok?"done":""}"><input type="checkbox" ${ok?"checked":""} onchange="setDone(${JSON.stringify(k)},this.checked)"><div><div class="name">${t[0]}</div><div class="desc">${t[1]}</div></div><div class="reward">${t[2]||"—"}<div class="source">FUT.GG / FC Hub</div></div></label>`}).join("")+"</section>"
+function k(g,t){return safeId(g)+"__"+safeId(t)}
+function done(kv){return !!state[kv]}
+function setDone(kv,v){state[kv]=v;save();renderSection()}
+function goHome(){active=null;$("home").classList.add("active");$("section").classList.remove("active");$("search").value="";renderHome();window.scrollTo(0,0)}
+function openSection(name){active=name;$("home").classList.remove("active");$("section").classList.add("active");$("search").value="";renderSection();window.scrollTo(0,0)}
+function renderHome(){
+ const names=Object.keys(DATA);
+ $("categories").innerHTML=names.map((name,i)=>{
+   const groups=DATA[name]||[];
+   let n=0,d=0;groups.forEach(g=>g.tasks.forEach(t=>{n++;if(done(k(g.g,t[0])))d++}));
+   return `<button class="category" onclick='openSection(${JSON.stringify(name)})'>
+     <div class="num">РАЗДЕЛ ${String(i+1).padStart(2,"0")}</div>
+     <div class="title">${name}</div>
+     <div class="count">${groups.length} групп • ${d}/${n} выполнено</div>
+     <div class="arrow">›</div>
+   </button>`;
  }).join("");
- document.getElementById("done").textContent=done;
- document.getElementById("left").textContent=all-done;
- document.getElementById("pct").textContent=all?Math.round(done/all*100)+"%":"0%";
 }
-function markAll(v){
- (DATA[active]||[]).forEach(g=>g.tasks.forEach(t=>state[id(g.g)+"__"+id(t[0])]=v));
- save();render();
+function renderSection(){
+ if(!active)return;
+ const groups=DATA[active]||[];
+ $("sectionTitle").textContent=active;
+ $("sectionSub").textContent=`${groups.length} групп заданий`;
+ const q=$("search").value.trim().toLowerCase();
+ let all=0,dn=0;
+ $("groups").innerHTML=groups.map(g=>{
+   const ts=g.tasks.filter(t=>(g.g+" "+(g.d||"")+" "+t[0]+" "+t[1]+" "+(t[2]||"")).toLowerCase().includes(q));
+   if(!ts.length)return "";
+   let gd=ts.filter(t=>done(k(g.g,t[0]))).length;all+=ts.length;dn+=gd;
+   return `<section class="group"><div class="gh"><div><h2>${g.g}</h2><p>${g.d||""}</p></div><span class="badge">${gd}/${ts.length}</span></div>`+
+   ts.map(t=>{let kv=k(g.g,t[0]),ok=done(kv);return `<label class="task ${ok?"done":""}">
+   <input type="checkbox" ${ok?"checked":""} onchange='setDone(${JSON.stringify(kv)},this.checked)'>
+   <div><div class="name">${t[0]}</div><div class="desc">${t[1]}</div></div>
+   <div class="reward">${t[2]||"—"}</div></label>`}).join("")+"</section>";
+ }).join("")||`<div class="empty">По этому запросу заданий не найдено.</div>`;
+ $("done").textContent=dn;$("left").textContent=all-dn;$("pct").textContent=all?Math.round(dn/all*100)+"%":"0%";
 }
-function resetAll(){if(confirm("Сбросить весь прогресс?")){state={};save();render()}}
-search.addEventListener("input",render);
-render();
+function markCurrent(v){(DATA[active]||[]).forEach(g=>g.tasks.forEach(t=>state[k(g.g,t[0])]=v));save();renderSection()}
+$("search").addEventListener("input",renderSection);
+renderHome();
 </script>
 </body>
 </html>
