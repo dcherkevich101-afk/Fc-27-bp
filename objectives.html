@@ -9,8 +9,11 @@
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#122033 0,#070b12 42%);color:var(--txt);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
 header{padding:20px 16px 10px;position:sticky;top:0;z-index:5;background:rgba(7,11,18,.94);backdrop-filter:blur(14px);border-bottom:1px solid #1c2735}
 h1{margin:0;font-size:25px} .sub{color:var(--muted);font-size:12px;margin-top:4px}
-.tabs{display:flex;gap:7px;overflow:auto;padding:12px 0 3px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
-.tab{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:#cbd5e1;padding:9px 12px;border-radius:999px;cursor:pointer}.tab.active{background:#173523;border-color:#2d8b50;color:#b7f7c9}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:13px 0 5px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;white-space:nowrap;border:1px solid #334155;background:#111a27;color:#d8e0ea;padding:10px 14px;border-radius:12px;cursor:pointer;font-size:13px;font-weight:600}
+.tab.active{background:#174629;border-color:#39a866;color:#d4ffe0;box-shadow:0 0 0 1px rgba(74,222,128,.12) inset}
+@media(max-width:600px){header{padding-bottom:8px}.tabs{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}.tab{font-size:12px;padding:9px 12px}}
 main{max-width:900px;margin:auto;padding:14px 12px 40px}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}.toolbar button{border:1px solid var(--line);background:var(--panel);color:var(--txt);padding:9px 11px;border-radius:10px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.stat{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:11px}.stat b{display:block;font-size:19px}.stat span{color:var(--muted);font-size:11px}
@@ -25,7 +28,7 @@ footer{text-align:center;color:#64748b;font-size:11px;padding:20px}
 <body>
 <header>
 <h1>FC 27 — Задания</h1>
-<div class="sub">Трекер прогресса • данные сверены с актуальными страницами FUT.GG и EA Help; режимы из твоих скриншотов сохранены.</div>
+<div class="sub">Выбирай раздел ниже — искать каждое задание через поиск больше не нужно.</div>
 <div class="tabs" id="tabs"></div>
 </header>
 <main>
@@ -104,7 +107,7 @@ const DATA = {
   ["Hit the Pitch","Сыграть 7 Live Events или Rivals/Squad Battles.","—"],
   ["Lace ’em Up","Сыграть матч в Live Events или Rivals/Squad Battles.","—"]
  ]},
- {g:"First Team Dreams",d:"Группа Squad Building Challenges Foundation. Подзадачи могут обновляться.","Keane Lewis-Potter + consumable; 400 SP total",tasks:[
+ {g:"First Team Dreams",d:"Группа Squad Building Challenges Foundation. Подзадачи могут обновляться.",tasks:[
   ["First Team Dreams","Завершить группу SBC Foundation.","Keane Lewis-Potter + consumable"]
  ]}
 ],
@@ -174,7 +177,7 @@ const DATA = {
 ]
 };
 
-const key="fc27_objectives_v5";
+const key="fc27_objectives_v6";
 let state=JSON.parse(localStorage.getItem(key)||"{}");
 let active="Сезон FC";
 const tabs=document.getElementById("tabs"),app=document.getElementById("app"),search=document.getElementById("search");
