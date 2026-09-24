@@ -3,135 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080b10">
 <title>FC 27 — Задания</title>
 <style>
-:root{--bg:#080b10;--card:#141a23;--card2:#1b2330;--text:#f4f7fb;--muted:#9ca8ba;--green:#35e68a;--line:#2a3444;--red:#ff5f6d}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
-.wrap{max-width:900px;margin:auto;padding:28px 16px 50px}
-h1{font-size:36px;line-height:1.05;margin:0 0 8px;font-weight:800}.sub{color:var(--muted);font-size:17px;line-height:1.4;margin-bottom:22px}
-.summary{background:linear-gradient(145deg,#14251f,#131923);border:1px solid #315943;border-radius:24px;padding:20px;margin-bottom:16px}
-.sumrow{display:flex;justify-content:space-between;align-items:end;gap:12px}.big{font-size:42px;font-weight:800}.label{color:var(--muted);font-size:14px;text-transform:uppercase;letter-spacing:.5px}.sp{font-size:25px;font-weight:800}.sp b{color:var(--green)}
-.bar{height:11px;background:#252d3a;border-radius:99px;overflow:hidden;margin-top:15px}.fill{height:100%;background:var(--green);width:0%;transition:.2s}
-.controls{display:flex;gap:10px;margin:14px 0 20px}.btn{flex:1;border:1px solid var(--line);background:#1b2230;color:white;border-radius:16px;padding:15px 12px;font-size:16px;font-weight:700}.btn.primary{background:var(--green);color:#06120c;border:0}.btn.reset{flex:0 0 auto;background:transparent;color:var(--muted)}
-.tabs{display:flex;background:#11161e;border:1px solid var(--line);border-radius:17px;padding:4px;margin-bottom:18px;position:sticky;top:8px;z-index:4}.tab{flex:1;border:0;background:transparent;color:var(--muted);padding:12px;border-radius:13px;font-weight:700;font-size:15px}.tab.active{background:#26303d;color:white}
-.section{margin:24px 0}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.section h2{font-size:21px;margin:0}.badge{font-size:13px;color:var(--green);background:#10271d;border:1px solid #28583f;padding:5px 9px;border-radius:99px;white-space:nowrap}
-.card{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:15px;margin:9px 0;display:flex;gap:13px;align-items:flex-start;transition:.15s}.card.done{opacity:.62;background:#11161d}.check{appearance:none;width:27px;height:27px;border-radius:9px;border:2px solid #465263;background:#0d1118;flex:0 0 27px;margin-top:1px;position:relative}.check:checked{background:var(--green);border-color:var(--green)}.check:checked:after{content:"✓";position:absolute;color:#07130d;font-weight:900;font-size:18px;left:4px;top:-1px}.body{min-width:0;flex:1}.title{font-weight:750;font-size:16px;line-height:1.3}.meta{color:var(--muted);font-size:13px;margin-top:5px;line-height:1.35}.reward{color:#b9c4d3;font-size:12px;margin-top:6px}.counter{display:flex;align-items:center;gap:8px;margin-top:10px}.counter button{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#202837;color:white;font-size:20px}.num{min-width:60px;text-align:center;font-weight:800}.hidden{display:none}.note{color:var(--muted);font-size:13px;line-height:1.5;margin-top:20px}.source{font-size:11px;color:#657186;margin-top:24px}
-@media(max-width:520px){.wrap{padding:24px 12px 40px}h1{font-size:32px}.big{font-size:36px}.controls{gap:8px}.btn{font-size:15px;padding:14px 8px}.card{padding:13px}.tabs{top:4px}}
+:root{--bg:#070b12;--panel:#101722;--panel2:#151e2b;--line:#263244;--txt:#f5f7fb;--muted:#8d9aab;--accent:#4ade80;--blue:#60a5fa;--gold:#fbbf24;--danger:#fb7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#122033 0,#070b12 42%);color:var(--txt);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+header{padding:20px 16px 10px;position:sticky;top:0;z-index:5;background:rgba(7,11,18,.94);backdrop-filter:blur(14px);border-bottom:1px solid #1c2735}
+h1{margin:0;font-size:25px} .sub{color:var(--muted);font-size:12px;margin-top:4px}
+.tabs{display:flex;gap:7px;overflow:auto;padding:12px 0 3px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:#cbd5e1;padding:9px 12px;border-radius:999px;cursor:pointer}.tab.active{background:#173523;border-color:#2d8b50;color:#b7f7c9}
+main{max-width:900px;margin:auto;padding:14px 12px 40px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}.toolbar button{border:1px solid var(--line);background:var(--panel);color:var(--txt);padding:9px 11px;border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.stat{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:11px}.stat b{display:block;font-size:19px}.stat span{color:var(--muted);font-size:11px}
+.group{background:rgba(16,23,34,.92);border:1px solid var(--line);border-radius:16px;margin:10px 0;overflow:hidden}.gh{padding:14px 14px 11px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.gh h2{font-size:16px;margin:0}.gh p{font-size:12px;color:var(--muted);margin:3px 0 0}.badge{white-space:nowrap;color:#b7f7c9;background:#12301f;border:1px solid #265f3c;border-radius:999px;padding:4px 8px;font-size:11px;height:max-content}
+.task{display:grid;grid-template-columns:26px 1fr auto;gap:9px;align-items:start;padding:12px 14px;border-bottom:1px solid #1c2735}.task:last-child{border-bottom:0}.task input{width:19px;height:19px;accent-color:var(--accent);margin-top:2px}.task.done .name{text-decoration:line-through;color:#7f8b9a}.name{font-weight:600}.desc{color:#aab5c3;font-size:12px;margin-top:3px}.reward{font-size:11px;color:var(--gold);text-align:right;max-width:150px}.source{font-size:10px;color:#64748b;margin-top:3px}
+.note{padding:11px 13px;background:#111827;border:1px dashed #344155;border-radius:12px;color:#aeb9c7;font-size:12px;margin:12px 0}
+.search{width:100%;padding:11px 12px;border-radius:11px;border:1px solid var(--line);background:var(--panel);color:var(--txt);outline:none;margin-bottom:10px}
+footer{text-align:center;color:#64748b;font-size:11px;padding:20px}
+@media(min-width:700px){.task{grid-template-columns:28px 1fr 190px}.stats{max-width:520px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>FC 27 — Задания</h1>
-  <div class="sub">Сезон 1: «Обратите внимание» • Ultimate Team • Карьера • The Grounds</div>
-
-  <div class="summary">
-    <div class="sumrow">
-      <div><div class="big" id="doneCount">0</div><div class="label">заданий выполнено</div></div>
-      <div class="sp">ОС: <b id="spCount">0</b></div>
-    </div>
-    <div class="bar"><div class="fill" id="fill"></div></div>
-    <div class="meta" id="summaryText">0% от отмеченных заданий</div>
-  </div>
-
-  <div class="controls">
-    <button class="btn primary" onclick="markAllVisible()">Отметить видимые</button>
-    <button class="btn reset" onclick="resetAll()">Сбросить</button>
-  </div>
-
-  <div class="tabs">
-    <button class="tab active" onclick="showTab('all',this)">Все</button>
-    <button class="tab" onclick="showTab('ut',this)">FUT</button>
-    <button class="tab" onclick="showTab('career',this)">Карьера</button>
-    <button class="tab" onclick="showTab('grounds',this)">The Grounds</button>
-  </div>
-
-  <div id="content"></div>
-  <div class="note">Прогресс сохраняется на этом устройстве автоматически. Еженедельные и ежедневные задания можно сбросить вручную в начале нового периода.</div>
-  <div class="source">Данные сверены по актуальным материалам FC 27 на 24.09.2026; отдельные внутриигровые формулировки могут обновляться EA.</div>
+<header>
+<h1>FC 27 — Задания</h1>
+<div class="sub">Трекер прогресса • данные сверены с актуальными страницами FUT.GG и EA Help; режимы из твоих скриншотов сохранены.</div>
+<div class="tabs" id="tabs"></div>
+</header>
+<main>
+<input class="search" id="search" placeholder="Поиск задания или группы…">
+<div class="toolbar">
+<button onclick="markAll(false)">Сбросить текущую вкладку</button>
+<button onclick="markAll(true)">Отметить текущую вкладку</button>
+<button onclick="resetAll()">Сбросить всё</button>
 </div>
-
+<div class="stats"><div class="stat"><b id="done">0</b><span>выполнено</span></div><div class="stat"><b id="left">0</b><span>осталось</span></div><div class="stat"><b id="pct">0%</b><span>прогресс</span></div></div>
+<div id="app"></div>
+<div class="note">⚠️ Временные цели (Weekly/Daily/Live Events) могут меняться по ходу сезона. Я не подставляю выдуманные задачи: если у FUT.GG сейчас отображается только название группы, карточка оставлена на уровне группы. <b>The Grounds</b> специально сохранён.</div>
+<footer>Последняя сверка веб-данных: 24.09.2026 • Прогресс хранится только в этом браузере (localStorage).</footer>
+</main>
 <script>
-const tasks=[
-{id:"utw1",tab:"ut",sec:"FUT — Еженедельные",title:"Выиграть 10 матчей в Squad Battles, Rivals или Live Events",target:10,unit:"побед",sp:0},
-{id:"utw2",tab:"ut",sec:"FUT — Еженедельные",title:"Забить 10 голов английскими игроками",target:10,unit:"голов",sp:0},
-{id:"utw3",tab:"ut",sec:"FUT — Еженедельные",title:"Купить и продать 10 игроков на трансферном рынке",target:10,unit:"игроков",sp:0},
-{id:"utd1",tab:"ut",sec:"FUT — Ежедневные",title:"Сыграть 1 матч",target:1,unit:"матч",sp:0},
-{id:"utd2",tab:"ut",sec:"FUT — Ежедневные",title:"Забить 2 гола",target:2,unit:"голов",sp:0},
-{id:"uts1",tab:"ut",sec:"FUT — Сезонные / еженедельные",title:"Сыграть 12 матчей",target:12,unit:"матчей",sp:0},
-{id:"uts2",tab:"ut",sec:"FUT — Сезонные / еженедельные",title:"Забить 16 голов",target:16,unit:"голов",sp:0},
-{id:"utf1",tab:"ut",sec:"FUT — Основы",title:"Сыграть 7 матчей Live Events",target:7,unit:"матчей",sp:0},
-{id:"utf2",tab:"ut",sec:"FUT — Основы",title:"Забить 20 голов в Live Events",target:20,unit:"голов",sp:0},
-{id:"utf3",tab:"ut",sec:"FUT — Основы",title:"Завершить группу SBC «Введение в Streamlined SBC»",target:1,unit:"раз",sp:0},
-{id:"utf4",tab:"ut",sec:"FUT — Основы",title:"Завершить 3 SBC",target:3,unit:"SBC",sp:0},
-{id:"utf5",tab:"ut",sec:"FUT — Основы",title:"Изменить название клуба, применить стиль сыгранности и изменить схему",target:3,unit:"действия",sp:0},
+const DATA = {
+"Сезон FC":[
+ {g:"Season Pass",d:"Общий прогресс Season Pass / SP.",tasks:[
+  ["Season Points","Отслеживай SP из всех поддерживаемых режимов.","SP"]
+ ]},
+],
+"Задания FC":[
+ {g:"Weekly Objectives",d:"Еженедельные задания.",tasks:[["Weekly Objectives","Выполнить недельные Objectives.","250 SP / 500 SP total"]]},
+ {g:"Daily Objectives",d:"Ежедневные задания.",tasks:[["Daily Objectives","Выполнить ежедневное Objective.","10 SP / 30 SP total"]]},
+ {g:"The Grounds",d:"Твои цели из FC Hub. Не удалять.",tasks:[
+  ["Сыграть 10 матчей Kickabout","Сыграть 10 матчей Kickabout.","250 ОС — группа Weekly"],
+  ["Сыграйте 10 мини-футбольных матчей","Сыграть 10 матчей мини-футбола.","250 ОС — группа Weekly"],
+  ["Сыграть 10 матчей Rush в открытом мире","Сыграть 10 матчей Rush в открытом мире.","250 ОС — группа Weekly"]
+ ]},
+ {g:"Manager Live",d:"Цели Manager Live из твоего FC Hub.",tasks:[
+  ["Завершить 3","Выполнить 3 цели Manager Live.","400 ОС — Weekly"],
+  ["Завершить 2","Выполнить 2 цели Manager Live.","400 ОС — Weekly"],
+  ["Завершить 1","Выполнить 1 цель Manager Live.","400 ОС — Weekly"]
+ ]},
+ {g:"Player Career",d:"Цель Player Career из твоего FC Hub.",tasks:[
+  ["Выполните 10 заданий матчей","Выполнить 10 Match Objectives.","750 ОС — Weekly"]
+ ]}
+],
+"Основы":[
+ {g:"Total Football",d:"Завершите три базовые группы Foundation Objectives.",tasks:[
+  ["Rising Through the Ranks","Завершить группу Rising Through the Ranks.","100 SP"],
+  ["First Team Dreams","Завершить группу First Team Dreams.","100 SP"],
+  ["The Journey Begins","Завершить группу The Journey Begins.","100 SP"]
+ ]},
+ {g:"Rising Through the Ranks",d:"Основы клуба.",tasks:[
+  ["Consumable Craze","Применить расходуемый предмет.","—"],
+  ["Style and Substance","Применить Chemistry Style.","—"],
+  ["Form Fitting","Изменить схему клуба.","—"],
+  ["For Club and Crest","Изменить название клуба.","—"],
+  ["Play 1","Сыграть 1 матч в любом FUT-режиме.","250 SP"]
+ ]},
+ {g:"The Journey Begins",d:"PVE Live Events и матчи.",tasks:[
+  ["A Test of Skill","Победить в PVE Live Events минимум на Semi-Pro или в PVP Live Events.","—"],
+  ["Finding the Net","Забить 20 голов в Live Events или Rivals/Squad Battles.","—"],
+  ["Hit the Pitch","Сыграть 7 Live Events или Rivals/Squad Battles.","—"],
+  ["Lace ’em Up","Сыграть матч в Live Events или Rivals/Squad Battles.","—"]
+ ]},
+ {g:"First Team Dreams",d:"Группа Squad Building Challenges Foundation. Подзадачи могут обновляться.","Keane Lewis-Potter + consumable; 400 SP total",tasks:[
+  ["First Team Dreams","Завершить группу SBC Foundation.","Keane Lewis-Potter + consumable"]
+ ]}
+],
+"Сезонные":[
+ {g:"Weekly Rush Points",d:"Набирайте Rush Points через бонусы вместе с партнёрами.","2x 84+ Gold Players Pack",tasks:[
+  ["Weekly Rush Points","Complete Rush Bonuses alongside your teammates to earn Rush Points.","2x 84+ Gold Players Pack"]
+ ]},
+ {g:"Squad Battles: Champions Qualification Points",d:"Получайте очки квалификации Champions в Squad Battles.","100 Points",tasks:[
+  ["Champions Qualification Points","Набрать Champions Qualification Points в Squad Battles.","100 Points"]
+ ]},
+ {g:"Claim the Armband",d:"Выберите 1 игрока Squad Foundations из 4 вариантов.","1 of 4 Squad Foundations Pick",tasks:[
+  ["Claim the Armband","Завершить objective и выбрать Miley / Moi Gómez / Banzuzi / Danois.","1 of 4 Squad Foundations Pick"]
+ ]},
+ {g:"Season 1: Ones to Watch Exhibition",d:"Текущая OTW Exhibition.",tasks:[
+  ["Score in 30","Забить 30 голов.","2x 81+"],["Score in 20","Забить 20 голов.","2x 80+"],["Assist 20","Сделать 20 голевых передач.","80+"],["Assist 15","Сделать 15 голевых передач.","2x 78+"],["Play 15","Сыграть 15 матчей.","2x 75+"],["Play 5","Сыграть 5 матчей.","2x 75+"],["Play 1","Сыграть 1 матч.","Consumables Pack"]
+ ]},
+ {g:"Season 1: Ones to Watch Exhibition Completionist",d:"Завершение Weekly Play целей Exhibition.",tasks:[
+  ["Completion 1","Завершить 1 weekly objective.","2,000 coins"],["Completion 2","Завершить 2.","4,000 coins"],["Completion 3","Завершить 3.","7,000 coins"],["Completion 4","Завершить 4.","13,000 coins"],["Группа","Завершить группу.","OTW Ousmane Diomandé"]
+ ]},
+ {g:"Season 1: Ones to Watch Exhibition Weekly Play",d:"Еженедельная серия OTW Exhibition. Состав может обновляться.","Consumable",tasks:[
+  ["Weekly Play","Выполнить актуальные Weekly Play challenges.","Consumable"]
+ ]},
+ {g:"Ones We Watched — Legendary",d:"Уровень сложности Legendary.","15x 75+ LaLiga Gold Players Pack",tasks:[["Legendary Challenge","Выполнить Legendary challenge.","15x 75+ LaLiga Gold Players Pack"]]},
+ {g:"Ones We Watched — World Class",d:"Уровень сложности World Class.","5x 78+ Premier League Gold Players Pack",tasks:[["World Class Challenge","Выполнить World Class challenge.","5x 78+ Premier League Gold Players Pack"]]},
+ {g:"Ones We Watched — Professional",d:"Уровень сложности Professional.","3x 78+ Serie A Gold Players Pack",tasks:[["Professional Challenge","Выполнить Professional challenge.","3x 78+ Serie A Gold Players Pack"]]},
+ {g:"Ones We Watched — Semi-Pro",d:"Уровень сложности Semi-Pro.","82+ Premier League Gold Player Pack",tasks:[["Semi-Pro Challenge","Выполнить Semi-Pro challenge.","82+ Premier League Gold Player Pack"]]},
+ {g:"Ones We Watched — Kick Off",d:"Kick Off challenges.","2x 75+ Gold Players Pack",tasks:[["Kick Off Challenge","Выполнить Kick Off challenge.","2x 75+ Gold Players Pack"]]},
+ {g:"Ones We Watched Challenge Completionist",d:"Завершить Ones We Watched Objectives.","OTW Savinho",tasks:[["Completionist","Завершить требуемые Ones We Watched Objectives.","OTW Savinho"]]},
+ {g:"FC 27 First Gameplay",d:"Viewership reward за трансляцию FC 27 First Gameplay.","Small Gold Players Pack",tasks:[["First Gameplay","Посмотреть соответствующую трансляцию Twitch/YouTube EASPORTSFC.","Small Gold Players Pack"]]}
+],
+"Кампании":[
+ {g:"Tactical Trials",d:"Тактические испытания. Все награды untradeable.","Lucas Rosa Squad Foundations",tasks:[
+  ["4-3-3 (2)","Сыграть 5 матчей только в 4-3-3 (2), без изменений; минимум 1 стартовый игрок Eredivisie.","2x 75+"],
+  ["5-2-1-2","Забить 4 гола только в 5-2-1-2, без изменений; минимум 1 стартовый игрок Bundesliga.","2x 78+"],
+  ["4-1-2-1-2 (2)","Забить 6 голов только в 4-1-2-1-2 (2), без изменений; минимум 1 стартовый игрок LALIGA.","2x 80+"],
+  ["3-4-2-1","Выиграть 3 матча только в 3-4-2-1, без изменений; минимум 1 стартовый игрок Premier League.","2x 81+"],
+  ["Группа","Завершить Tactical Trials.","Lucas Rosa Squad Foundations"]
+ ]}
+],
+"Этапы":[
+ {g:"Draft Milestone",d:"Прогресс Draft.",tasks:[["Play 5","Сыграть 5 Draft матчей.","Coin Boost"],["Play 10","Сыграть 10 Draft матчей.","1 of 2 78+"],["Play 15","Сыграть 15 Draft матчей.","75+ Gold Player Pack"]]},
+ {g:"Co-Op Milestone",d:"Прогресс Co-op.",tasks:[["Play 5","Сыграть 5 Co-op матчей.","Coin Boost"],["Play 10","Сыграть 10 Co-op матчей.","1 of 2 78+"],["Play 50","Сыграть 50 Co-op матчей.","75+ Gold Player Pack + 2x Players Pack"]]},
+ {g:"Rush Milestone",d:"Матчи и Rush Bonuses.",tasks:[["Play 5","Сыграть 5 Rush матчей.","1 of 2 78+"],["Play 10","Сыграть 10 Rush матчей.","1 of 2 78+"],["Play 15","Сыграть 15 Rush матчей.","Jumbo Gold Pack"],["Bonuses 10","Выполнить 10 Rush Bonuses.","75+"],["Bonuses 20","Выполнить 20 Rush Bonuses.","2x 75+"],["Team goals 20","Забить 20 командных голов.","Small Gold Players Pack"]]},
+ {g:"Moments Stars Milestone",d:"Зарабатывайте Stars в Moments.",tasks:[["15 Stars","Набрать 15 Stars.","Large Bronze Players Pack"],["30 Stars","Набрать 30 Stars.","Large Silver Players Pack"],["60 Stars","Набрать 60 Stars.","Small Gold Players Pack"]]},
+ {g:"Squad Building Milestone",d:"SBC milestone.",tasks:[["5 SBCs","Завершить 5 SBC groups.","1 of 3 79+ Gold Player Pick"],["10 SBCs","Завершить 10 SBC groups.","Jumbo Gold Pack"],["25 SBCs","Завершить 25 SBC groups.","Small Gold Players Pack"]]},
+ {g:"Transfer Market Milestone",d:"Листинг и Buy Now.",tasks:[["List 25","Выставить 25 игроков на Transfer Market.","2,500 coins"],["List 50","Выставить 50 игроков.","5,000 coins"],["Buy Now 25","Купить 25 игроков через Buy Now.","2,500 coins"],["Buy Now 50","Купить 50 игроков через Buy Now.","5,000 coins"]]},
+ {g:"Live Events Milestone",d:"Матчи Live Events.",tasks:[["Play 5","Сыграть 5 Live Events матчей.","1 of 3 79+"],["Play 10","Сыграть 10 Live Events матчей.","Small Gold Players Pack"],["Play 20","Сыграть 20 Live Events матчей.","1 of 2 80+"]]},
+ {g:"Squad Battles Milestone",d:"Матчи Squad Battles на любой сложности.",tasks:[["Play 5","Сыграть 5 Squad Battles матчей.","Coin Boost"],["Play 10","Сыграть 10 Squad Battles матчей.","75+ Gold Player Pack + 2x Players Pack"],["Play 15","Сыграть 15 Squad Battles матчей.","Large Gold Pack"]]},
+ {g:"Rivals Milestone",d:"Матчи Division Rivals.",tasks:[["Play 5","Сыграть 5 Rivals матчей.","1 of 2 77+"],["Play 10","Сыграть 10 Rivals матчей.","1 of 2 78+"],["Play 15","Сыграть 15 Rivals матчей.","5,000 coins + 75+ Gold Player Pack"]]},
+ {g:"Champions Milestone",d:"Матчи Champions.",tasks:[["Play 5","Сыграть 5 Champions матчей.","Coin Boost"],["Play 10","Сыграть 10 Champions матчей.","75-83 Gold Player Pack"],["Play 15","Сыграть 15 Champions матчей.","4x 81+ Gold Players Pack + 5,000 coins"]]},
+ {g:"Gallery Milestone",d:"Развитие Gallery Score.",tasks:[["Gallery Milestone","Повышать Gallery Score и открывать milestone rewards.","Evo Unlock"]]},
+ {g:"Ted Lasso’s Masterclass",d:"Тематические цели AFC Richmond / Ted Lasso. Состав временный.","Manager Evo Unlock",tasks:[["Ted Lasso’s Masterclass","Выполнить актуальные challenges группы.","Manager Evo Unlock"]]}
+],
+"Мастерство":[
+ {g:"Squad Battles Mastery",d:"Долгосрочные победы в Squad Battles.",tasks:[["Win 25","Выиграть 25 матчей минимум на Semi-Pro.","Small Gold Players Pack"],["Win 50","Выиграть 50 матчей.","Large Gold Pack"],["Win 100","Выиграть 100 матчей.","84+ Gold Player Pack"]]},
+ {g:"Champions Mastery",d:"Долгосрочные победы Champions.",tasks:[["Win 25","Выиграть 25.","10x 78+"],["Win 50","Выиграть 50.","Giant Gold Pack"],["Win 100","Выиграть 100.","Jumbo Gold Players Pack"]]},
+ {g:"Rivals Mastery",d:"Долгосрочные победы Rivals.",tasks:[["Win 25","Выиграть 25.","Large Gold Pack"],["Win 50","Выиграть 50.","10x 78+"],["Win 100","Выиграть 100.","Giant Gold Pack"]]},
+ {g:"Transfer Market Mastery",d:"Листинг и покупки на рынке.",tasks:[["List 250","Выставить 250.","5,000 coins"],["List 500","Выставить 500.","80+"],["List 1,000","Выставить 1,000.","3x 81+"],["Buy Now 250","Купить 250 через Buy Now.","5,000 coins"],["Buy Now 500","Купить 500 через Buy Now.","80+"],["Buy Now 1,000","Купить 1,000 через Buy Now.","3x 81+"]]},
+ {g:"First Owned Mastery",d:"Победы составом из First Owned игроков.",tasks:[["Win 25","Выиграть 25 матчей First Owned составом.","10,000 coins"],["Win 50","Выиграть 50.","7x 75+"],["Win 100","Выиграть 100.","10x 75+"]]},
+ {g:"Goals and Assist Mastery",d:"Долгосрочные голы и ассисты.",tasks:[["Assist 100","Сделать 100 ассистов.","2x 75+"],["Assist 500","Сделать 500 ассистов.","80+ + Coin Boost"],["Score 100","Забить 100.","2x 75+"],["Score 500","Забить 500.","80+ + Coin Boost"],["Direct Free Kicks 50","Забить 50 прямых штрафных.","10,000 coins"],["Cross Assists 50","Сделать 50 ассистов с кроссов.","10,000 coins"]]},
+ {g:"Squad Building Mastery",d:"Долгосрочный прогресс SBC.",tasks:[["50 SBCs","Завершить 50 SBC groups.","Jumbo Gold Pack"],["100 SBCs","Завершить 100.","7x 75+"],["250 SBCs","Завершить 250.","10x 80+"]]},
+ {g:"Live Events Mastery",d:"Долгосрочные победы в Live Events.",tasks:[["Win 25","Выиграть 25.","Small Gold Players Pack"],["Win 50","Выиграть 50.","Large Gold Pack"],["Win 100","Выиграть 100.","84+ Gold Player Pack"]]}
+],
+"FC Pro":[
+ {g:"FC Pro Open Ladder",d:"FC Pro Open Ladder.",tasks:[["Play 5","Сыграть 5 матчей Open Ladder.","Badge"],["Reach Division 5","Достичь Division 5 в Rivals для квалификации.","Adidas CNXT25 Pro Ball"]]},
+ {g:"Top 500: FC Pro Open Ladder",d:"Группа ещё не выпущена по текущему источнику.",tasks:[["Coming Soon","Objectives пока не released.","—"]]}
+]
+};
 
-{id:"otw1",tab:"ut",sec:"FUT — Ones We Watched",title:"Kick Off: выиграть 1 матч и сделать результативную передачу во всех 3 матчах",target:1,unit:"этап",sp:0},
-{id:"otw2",tab:"ut",sec:"FUT — Ones We Watched",title:"Полупрофессионал: выиграть 1 матч и сделать 3 результативные передачи; испанец в составе",target:1,unit:"этап",sp:0},
-{id:"otw3",tab:"ut",sec:"FUT — Ones We Watched",title:"Профессионал: выиграть 1 матч и забить во всех 5 матчах; игрок Серии A в составе",target:1,unit:"этап",sp:0},
-{id:"otw4",tab:"ut",sec:"FUT — Ones We Watched",title:"Мировой класс: выиграть 1 матч и забить 2 гола финтами; испанец + игрок АПЛ",target:1,unit:"этап",sp:0},
-{id:"otw5",tab:"ut",sec:"FUT — Ones We Watched",title:"Легендарный: выиграть 4 матча и забить 5 голов",target:1,unit:"этап",sp:0},
-{id:"otw6",tab:"ut",sec:"FUT — Ones We Watched",title:"Завершить все задания Ones We Watched",target:1,unit:"награда",sp:0},
-
-{id:"ex1",tab:"ut",sec:"FUT — Выставочные матчи «Обратите внимание»",title:"Сыграть 1 матч",target:1,unit:"матч",sp:0},
-{id:"ex2",tab:"ut",sec:"FUT — Выставочные матчи «Обратите внимание»",title:"Сыграть 5 матчей",target:5,unit:"матчей",sp:0},
-{id:"ex3",tab:"ut",sec:"FUT — Выставочные матчи «Обратите внимание»",title:"Сыграть 15 матчей",target:15,unit:"матчей",sp:0},
-{id:"ex4",tab:"ut",sec:"FUT — Выставочные матчи «Обратите внимание»",title:"Сделать 15 результативных передач",target:15,unit:"передач",sp:0},
-{id:"ex5",tab:"ut",sec:"FUT — Выставочные матчи «Обратите внимание»",title:"Сделать 20 результативных передач",target:20,unit:"передач",sp:0},
-{id:"ex6",tab:"ut",sec:"FUT — Выставочные матчи «Обратите внимание»",title:"Забить в 20 отдельных матчах",target:20,unit:"матчей",sp:0},
-{id:"ex7",tab:"ut",sec:"FUT — Выставочные матчи «Обратите внимание»",title:"Забить в 30 отдельных матчах",target:30,unit:"матчей",sp:0},
-{id:"exc",tab:"ut",sec:"FUT — Выставочные матчи «Обратите внимание»",title:"Завершить все еженедельные задания выставочных матчей",target:1,unit:"группа",sp:0},
-
-{id:"mc1",tab:"career",sec:"Карьера — Тренерская карьера",title:"Сыграть 5 полных матчей в одном сохранении",target:5,unit:"матчей",sp:1200},
-{id:"ml1",tab:"career",sec:"Карьера — Manager Live",title:"Transfer Savvy — получить прибыль в стартовом трансферном окне",target:1,unit:"задание",sp:0},
-{id:"ml2",tab:"career",sec:"Карьера — Manager Live",title:"Winning Start — остаться без поражений и выиграть минимум 3 матча",target:1,unit:"задание",sp:0},
-{id:"ml3",tab:"career",sec:"Карьера — Manager Live",title:"Top at Christmas — быть лидером лиги к Рождеству",target:1,unit:"задание",sp:0},
-{id:"ml4",tab:"career",sec:"Карьера — Manager Live",title:"Rio's Rising — развить Рио Нгумоа до статуса суперзвезды",target:1,unit:"задание",sp:0},
-{id:"mlg",tab:"career",sec:"Карьера — Manager Live",title:"Завершить 3 задания Manager Live",target:3,unit:"задания",sp:1000},
-{id:"pc1",tab:"career",sec:"Карьера — Игрок",title:"Завершить 10 заданий матчей",target:10,unit:"заданий",sp:1250},
-
-{id:"grw1",tab:"grounds",sec:"The Grounds — Еженедельные",title:"Сыграть 10 матчей Rush в открытом мире (выиграть 5)",target:10,unit:"матчей",sp:0},
-{id:"grw2",tab:"grounds",sec:"The Grounds — Еженедельные",title:"Сыграть 10 матчей Kickabout",target:10,unit:"матчей",sp:0},
-{id:"grw3",tab:"grounds",sec:"The Grounds — Еженедельные",title:"Попасть по 50 целям Drop Kick",target:50,unit:"целей",sp:0},
-{id:"grd1",tab:"grounds",sec:"The Grounds — Ежедневные",title:"Сыграть 2 матча",target:2,unit:"матча",sp:0},
-{id:"grd2",tab:"grounds",sec:"The Grounds — Ежедневные",title:"Забить 3 гола",target:3,unit:"голов",sp:0},
-{id:"grd3",tab:"grounds",sec:"The Grounds — Ежедневные",title:"Попасть по 10 целям Drop Kick",target:10,unit:"целей",sp:0}
-];
-
-let state=JSON.parse(localStorage.getItem("fc27_tasks_v2")||"{}");
-function getVal(t){return Math.min(t.target, Number(state[t.id]||0))}
-function save(){localStorage.setItem("fc27_tasks_v2",JSON.stringify(state)); render()}
-function setVal(id,v){state[id]=Math.max(0,Math.min(v, tasks.find(x=>x.id===id).target));save()}
-function toggle(id){let t=tasks.find(x=>x.id===id); setVal(id,getVal(t)>=t.target?0:t.target)}
-function showTab(tab,el){document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));el.classList.add("active");render(tab)}
-let currentTab="all";
-function render(tab=currentTab){
- currentTab=tab;
- const list=tab==="all"?tasks:tasks.filter(t=>t.tab===tab);
- const secs=[...new Set(list.map(t=>t.sec))];
- document.getElementById("content").innerHTML=secs.map(sec=>{
-   const arr=list.filter(t=>t.sec===sec), done=arr.filter(t=>getVal(t)>=t.target).length;
-   return `<div class="section"><div class="sectionhead"><h2>${sec}</h2><span class="badge">${done}/${arr.length}</span></div>`+
-   arr.map(t=>{let v=getVal(t),d=v>=t.target;return `<div class="card ${d?"done":""}">
-   <input class="check" type="checkbox" ${d?"checked":""} onclick="toggle('${t.id}')">
-   <div class="body"><div class="title">${t.title}</div>
-   <div class="meta">${v}/${t.target} ${t.unit}${t.sp?` • ${t.sp.toLocaleString("ru-RU")} ОС`:""}</div>
-   ${t.target>1?`<div class="counter"><button onclick="setVal('${t.id}',${v-1})">−</button><div class="num">${v} / ${t.target}</div><button onclick="setVal('${t.id}',${v+1})">+</button></div>`:""}
-   </div></div>`}).join("")+"</div>"
+const key="fc27_objectives_v4";
+let state=JSON.parse(localStorage.getItem(key)||"{}");
+let active="Сезон FC";
+const tabs=document.getElementById("tabs"),app=document.getElementById("app"),search=document.getElementById("search");
+function id(s){return s.replace(/[^a-zA-Zа-яА-Я0-9]+/g,"_")}
+function save(){localStorage.setItem(key,JSON.stringify(state))}
+function isDone(k){return !!state[k]}
+function setDone(k,v){state[k]=v;save();render()}
+function totals(){
+ let all=0,done=0;
+ Object.values(DATA).forEach(gs=>gs.forEach(g=>g.tasks.forEach(t=>{all++;if(isDone(id(g.g)+"__"+id(t[0])))done++})));
+ return [all,done]
+}
+function renderTabs(){
+ tabs.innerHTML=Object.keys(DATA).map(x=>`<button class="tab ${x===active?"active":""}" onclick="active=${JSON.stringify(x)};search.value='';render()">${x}</button>`).join("");
+}
+function render(){
+ renderTabs(); let q=search.value.trim().toLowerCase(), all=0,done=0;
+ let groups=DATA[active]||[];
+ app.innerHTML=groups.map(g=>{
+   let tasks=g.tasks.filter(t=>!q || (g.g+" "+g.d+" "+t[0]+" "+t[1]+" "+t[2]).toLowerCase().includes(q));
+   if(!tasks.length)return "";
+   let gd=tasks.filter(t=>isDone(id(g.g)+"__"+id(t[0]))).length;
+   all+=tasks.length;done+=gd;
+   return `<section class="group"><div class="gh"><div><h2>${g.g}</h2><p>${g.d||""}</p></div><span class="badge">${gd}/${tasks.length}</span></div>`+
+   tasks.map(t=>{let k=id(g.g)+"__"+id(t[0]),ok=isDone(k);return `<label class="task ${ok?"done":""}"><input type="checkbox" ${ok?"checked":""} onchange="setDone(${JSON.stringify(k)},this.checked)"><div><div class="name">${t[0]}</div><div class="desc">${t[1]}</div></div><div class="reward">${t[2]||"—"}<div class="source">FUT.GG / FC Hub</div></div></label>`}).join("")+"</section>"
  }).join("");
- updateSummary();
+ document.getElementById("done").textContent=done;
+ document.getElementById("left").textContent=all-done;
+ document.getElementById("pct").textContent=all?Math.round(done/all*100)+"%":"0%";
 }
-function updateSummary(){
- const done=tasks.filter(t=>getVal(t)>=t.target).length, total=tasks.length;
- const pct=Math.round(done/total*100);
- const sp=tasks.reduce((s,t)=>s+(getVal(t)>=t.target?t.sp:0),0);
- document.getElementById("doneCount").textContent=done;
- document.getElementById("spCount").textContent=sp.toLocaleString("ru-RU");
- document.getElementById("fill").style.width=pct+"%";
- document.getElementById("summaryText").textContent=`${pct}% выполнено • ${done} из ${total} заданий`;
+function markAll(v){
+ (DATA[active]||[]).forEach(g=>g.tasks.forEach(t=>state[id(g.g)+"__"+id(t[0])]=v));
+ save();render();
 }
-function markAllVisible(){tasks.filter(t=>currentTab==="all"||t.tab===currentTab).forEach(t=>state[t.id]=t.target);save()}
-function resetAll(){if(confirm("Сбросить весь прогресс заданий?")){state={};save()}}
+function resetAll(){if(confirm("Сбросить весь прогресс?")){state={};save();render()}}
+search.addEventListener("input",render);
 render();
 </script>
 </body>
