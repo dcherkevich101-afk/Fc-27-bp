@@ -48,20 +48,41 @@ const DATA = {
  ]},
 ],
 "Задания FC":[
- {g:"Weekly Objectives",d:"Еженедельные задания.",tasks:[["Weekly Objectives","Выполнить недельные Objectives.","250 SP / 500 SP total"]]},
- {g:"Daily Objectives",d:"Ежедневные задания.",tasks:[["Daily Objectives","Выполнить ежедневное Objective.","10 SP / 30 SP total"]]},
+ {g:"Weekly Objectives",d:"Актуальная недельная группа Ultimate Team.",tasks:[
+  ["Win 10","Выиграть 10 матчей в Squad Battles, Rivals или Live Events.","SP"],
+  ["English 10","Забить 10 голов игроками из Англии.","SP"],
+  ["Buy & Sell 10","Купить и продать 10 игроков на Transfer Market.","SP"],
+  ["Группа","Завершить все 3 задания.","500 SP total"]
+ ]},
+ {g:"Daily Objectives",d:"Сбрасывается ежедневно.",tasks:[
+  ["Play 1","Сыграть 1 матч в любом FUT-режиме.","10 SP"],
+  ["Scoring Success","Забить 2 гола в любом FUT-режиме.","10 SP"],
+  ["Группа","Выполнить оба ежедневных задания.","30 SP total"]
+ ]},
+ {g:"Seasonal Objectives",d:"Еженедельная сезонная группа Ultimate Team.",tasks:[
+  ["Play 12","Сыграть 12 матчей в Ultimate Team.","SP"],
+  ["Score 16","Забить 16 голов в Ultimate Team.","SP"],
+  ["Группа","Завершить оба задания.","500 SP total"]
+ ]},
  {g:"The Grounds",d:"Твои цели из FC Hub. Не удалять.",tasks:[
-  ["Сыграть 10 матчей Kickabout","Сыграть 10 матчей Kickabout.","250 ОС — группа Weekly"],
-  ["Сыграйте 10 мини-футбольных матчей","Сыграть 10 матчей мини-футбола.","250 ОС — группа Weekly"],
-  ["Сыграть 10 матчей Rush в открытом мире","Сыграть 10 матчей Rush в открытом мире.","250 ОС — группа Weekly"]
+  ["In-World Rush","Сыграть 10 матчей In-World Rush и выиграть 5 из них.","1,000 SP — Weekly Grounds"],
+  ["Kickabout","Сыграть 10 матчей Kickabout.","1,000 SP — Weekly Grounds"],
+  ["Drop Kick Targets","Попасть по 50 Drop Kick Targets.","1,000 SP — Weekly Grounds"],
+  ["Daily — Play 2","Сыграть 2 матча.","100 SP/day — Daily Grounds"],
+  ["Daily — Score 3","Забить 3 гола.","100 SP/day — Daily Grounds"],
+  ["Daily — Targets 10","Попасть по 10 Drop Kick Targets.","100 SP/day — Daily Grounds"]
  ]},
- {g:"Manager Live",d:"Цели Manager Live из твоего FC Hub.",tasks:[
-  ["Завершить 3","Выполнить 3 цели Manager Live.","400 ОС — Weekly"],
-  ["Завершить 2","Выполнить 2 цели Manager Live.","400 ОС — Weekly"],
-  ["Завершить 1","Выполнить 1 цель Manager Live.","400 ОС — Weekly"]
+ {g:"Manager Career — Weekly",d:"Season Pass: Manager Career.",tasks:[
+  ["Play 5 Full Matches","Сыграть 5 полных матчей в одном сохранении Manager Career.","1,200 SP — Weekly"]
  ]},
- {g:"Player Career",d:"Цель Player Career из твоего FC Hub.",tasks:[
-  ["Выполните 10 заданий матчей","Выполнить 10 Match Objectives.","750 ОС — Weekly"]
+ {g:"Manager Live",d:"Season Pass: Manager Live.",tasks:[
+  ["Complete 3 Challenges","Завершить любые 3 Manager Live Challenges.","1,000 SP — Weekly"],
+  ["Transfer Savvy","Завершить Manager Live challenge Transfer Savvy.","Входит в 3 challenges"],
+  ["Winning Start","Завершить Manager Live challenge Winning Start.","Входит в 3 challenges"],
+  ["Top at Christmas","Завершить Manager Live challenge Top at Christmas.","Входит в 3 challenges"]
+ ]},
+ {g:"Player Career",d:"Season Pass: Player Career.",tasks:[
+  ["Выполните 10 заданий матчей","Выполнить 10 Match Objectives в Player Career.","1,250 SP — Weekly"]
  ]}
 ],
 "Основы":[
@@ -153,7 +174,7 @@ const DATA = {
 ]
 };
 
-const key="fc27_objectives_v4";
+const key="fc27_objectives_v5";
 let state=JSON.parse(localStorage.getItem(key)||"{}");
 let active="Сезон FC";
 const tabs=document.getElementById("tabs"),app=document.getElementById("app"),search=document.getElementById("search");
